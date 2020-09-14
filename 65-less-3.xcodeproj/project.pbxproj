@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1B03BF842508A28300D46E20 /* UItableViewEctention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B03BF832508A28300D46E20 /* UItableViewEctention.swift */; };
+		1B248DDA250F39A300E77EAF /* UICollectionViewExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B248DD9250F39A300E77EAF /* UICollectionViewExtentions.swift */; };
 		1B3F764824F76B730087B689 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3F764724F76B730087B689 /* AppDelegate.swift */; };
 		1B3F764A24F76B730087B689 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3F764924F76B730087B689 /* SceneDelegate.swift */; };
 		1B3F764D24F76B730087B689 /* _5_less_3.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1B3F764B24F76B730087B689 /* _5_less_3.xcdatamodeld */; };
@@ -37,6 +38,7 @@
 
 /* Begin PBXFileReference section */
 		1B03BF832508A28300D46E20 /* UItableViewEctention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UItableViewEctention.swift; sourceTree = "<group>"; };
+		1B248DD9250F39A300E77EAF /* UICollectionViewExtentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtentions.swift; sourceTree = "<group>"; };
 		1B3F764424F76B730087B689 /* 65-less-3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "65-less-3.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B3F764724F76B730087B689 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1B3F764924F76B730087B689 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				1B03BF832508A28300D46E20 /* UItableViewEctention.swift */,
+				1B248DD9250F39A300E77EAF /* UICollectionViewExtentions.swift */,
 			);
 			path = extention;
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 				1B3F764824F76B730087B689 /* AppDelegate.swift in Sources */,
 				1B03BF842508A28300D46E20 /* UItableViewEctention.swift in Sources */,
 				1BF5C90524FCBCA800CA02C7 /* TableViewCell.swift in Sources */,
+				1B248DDA250F39A300E77EAF /* UICollectionViewExtentions.swift in Sources */,
 				1B3F764F24F76B730087B689 /* ContentView.swift in Sources */,
 				1BBA14672505FC4000431F8E /* collectionView.swift in Sources */,
 				1BBA146D250602C100431F8E /* FlowLayout.swift in Sources */,

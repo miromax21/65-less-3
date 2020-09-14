@@ -9,12 +9,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CollectionViewCell" customModule="_5_less_3" customModuleProvider="target">
             <connections>
-                <outlet property="bottomLable" destination="LNp-0x-fSw" id="lmn-rU-t1m"/>
-                <outlet property="topLable" destination="17G-hY-Fkd" id="Kf2-7P-K0K"/>
+                <outlet property="bottomLable" destination="LNp-0x-fSw" id="5ky-Xw-r9g"/>
+                <outlet property="topLable" destination="17G-hY-Fkd" id="PrB-gT-x9C"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view autoresizesSubviews="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" id="iN0-l3-epB">
+        <view autoresizesSubviews="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleAspectFill" preservesSuperviewLayoutMargins="YES" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="414" height="135"/>
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
             <subviews>
