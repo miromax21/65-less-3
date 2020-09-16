@@ -12,23 +12,6 @@ class CollectionViewCell: UICollectionViewCell{
     var view:UIView!
     @IBOutlet weak var topLable: UILabel!
     @IBOutlet weak var bottomLable: UILabel!
-    var text = [
-        "weoqienqwjkenqiwebqwebqjweklqwebqwjebqjkwebqjwebqkwebqkjwebqjkwelqlwebqjlwebqjlwebqwejqwejqweb",
-        "weoqienqwjkenqiwebq webqjw eklqwebqwjebq jkwebqjwebqkwebqkjwebqjkwelqlwebqjlwebqjlwebqwejqwejqweb weoqienqwjkenqiwebqwebqjweklqwebqwj ebqjkwebqjwebqkwebqkjwebqjkwe lqlwebqjlwebqj lwebqwejqwejqweb",
-        "weoqienqwjkenqiwebq webqjw eklqwebqwjebq jkwebqjwebqkwebqkjwebqjkwelqlwebqjlwebqjlwebqwejqwejqweb weoqienqwjkenqiwebqwebqjweklqwebqwj ebqjkwebqjwebqkwebqkjwebqjkwe lqlwebqjlwebqj lwebqwejqwejqweb weoqienqwjkenqiwebq webqjw eklqwebqwjebq jkwebqjwebqkwebqkjwebqjkwelqlwebqjlwebqjlwebqwejqwejqweb weoqienqwjkenqiwebqwebqjweklqwebqwj ebqjkwebqjwebqkwebqkjwebqjkwe lqlwebqjlwebqj lwebqwejqwejqweb"
-        
-    ]
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            contentView.leftAnchor.constraint(equalTo: leftAnchor),
-            contentView.rightAnchor.constraint(equalTo: rightAnchor),
-            contentView.topAnchor.constraint(equalTo: topAnchor),
-            contentView.bottomAnchor.constraint(equalTo: bottomAnchor)
-            ])
-    }
     
     override init(frame : CGRect)
     {
@@ -41,28 +24,33 @@ class CollectionViewCell: UICollectionViewCell{
         xibSetup()
     }
 
-
-    func xibSetup()
+    func setup(title:String,text:String){
+        self.topLable.text = title
+        self.bottomLable.text =  text
+    }
+    
+    
+    fileprivate func xibSetup()
     {
         view = loadViewFromNib()
-        view.frame = self.bounds
+     //   view.frame = self.bound
         view.autoresizesSubviews = true
         addSubview(view)
+        NSLayoutConstraint.activate([
+            view.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 20),
+            view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 20),
+            view.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 10),
+            view.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: 10)])
+
+
+        
     }
-
-
-    func loadViewFromNib() -> UIView {
-
+    
+    fileprivate func loadViewFromNib() -> UIView {
         let bundle = Bundle(for: type(of: self))
         let nib = UINib(nibName: "collectionViewCell", bundle: bundle)
         let view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
-
         return view
     }
-    func setup(index: Int){
-        let item = index % 3 > 3 ? 0 : (index % 3) ?? 0
-           self.topLable.text = text[item]
-           self.bottomLable.text = "adlasndjaksbds;as;idbai;sdbai;sdba;sdba;sdas;dbausdbau;sda;usdba;usdas;dbasdbaus"
-       }
 }
 
