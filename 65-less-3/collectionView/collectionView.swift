@@ -21,9 +21,9 @@ class collectionViewController:UIViewController {
     override func endAppearanceTransition() {
         setUpLauout()
     }
-//    override func viewDidLayoutSubviews() {
-//         setUpLauout()
-//    }
+    override func viewDidLayoutSubviews() {
+         setUpLauout()
+    }
 
     func setupTableView() {
         setUpLauout()
@@ -73,9 +73,10 @@ extension collectionViewController: UICollectionViewDataSource, UICollectionView
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.identifier, for: indexPath) as! CollectionViewCell
         cell.setup(title: item.title, text: item.text)
-        cell.frame.size.width = self.view.frame.width
+       // cell.frame.size.width = self.view.frame.width
         return cell
     }
+    
     
 //    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
 //        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.identifier, for: indexPath) as! CollectionViewCell
