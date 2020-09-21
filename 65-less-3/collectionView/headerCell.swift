@@ -17,7 +17,9 @@ import Foundation
 
 import Foundation
 import UIKit
-class CollectionViewHeaderCell: UICollectionViewCell{
+class CollectionViewHeaderCell: UICollectionViewCell, MyCollectionViewHeaderCell {
+    let IDENTIFIER = "headerCell"
+    
     @IBOutlet weak var headerLabel: UILabel!
     var view:UIView!
     
@@ -32,13 +34,9 @@ class CollectionViewHeaderCell: UICollectionViewCell{
         xibSetup()
     }
 
-
-
-
-    func setup(text:String){
-        headerLabel.text =  text
+    func setup(title: String, text: String) {
+        headerLabel.text =  title
     }
-    
     
     fileprivate func xibSetup()
     {
@@ -51,7 +49,7 @@ class CollectionViewHeaderCell: UICollectionViewCell{
     fileprivate func loadViewFromNib() -> UIView {
 
         let bundle = Bundle(for: type(of: self))
-        let nib = UINib(nibName: "headerCell", bundle: bundle)
+        let nib = UINib(nibName: IDENTIFIER, bundle: bundle)
         let view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
         return view
     }

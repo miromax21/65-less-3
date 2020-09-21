@@ -8,7 +8,9 @@
 
 import Foundation
 import UIKit
-class CollectionViewCell: UICollectionViewCell{
+class CollectionViewCell: UICollectionViewCell, MyCollectionViewCellWithImage {
+    
+    
     var view:UIView!
 
     @IBOutlet weak var topLable: UILabel!
@@ -24,32 +26,27 @@ class CollectionViewCell: UICollectionViewCell{
         super.init(coder: aDecoder)
         xibSetup()
     }
-
-    func setup(title:String,text:String){
+    func setup(title: String, text: String, image imageUrl: URL? = nil) {
         self.topLable.text = title
         self.bottomLable.text =  text
     }
     
-    
     fileprivate func xibSetup()
     {
         view = loadViewFromNib()
-        
-
         addSubview(view)
         NSLayoutConstraint.activate([
-            view.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 20),
-            view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 20),
-            view.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 10),
-            view.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: 10)])
+            view.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0),
+            view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0),
+            view.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 0),
+            view.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: 0)])
         view.frame = self.bounds
-
-        
+ 
     }
     
     fileprivate func loadViewFromNib() -> UIView {
         let bundle = Bundle(for: type(of: self))
-        let nib = UINib(nibName: "collectionViewCell", bundle: bundle)
+        let nib = UINib(nibName: "CollectionViewCell", bundle: bundle)
         let view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
         return view
     }

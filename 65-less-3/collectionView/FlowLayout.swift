@@ -10,7 +10,18 @@ import Foundation
 import UIKit
 
 class FlowLayout: UICollectionViewFlowLayout {
-
+    var gridSize: Int = 1
+    override init() {
+        super.init()
+    }
+    convenience init(gridSize:Int = 1) {
+        self.init()
+        self.gridSize = gridSize
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         let layoutAttributesObjects = super.layoutAttributesForElements(in: rect)?.map{ $0.copy() } as? [UICollectionViewLayoutAttributes]
         layoutAttributesObjects?.forEach({ layoutAttributes in
@@ -20,6 +31,8 @@ class FlowLayout: UICollectionViewFlowLayout {
                 }
             }
         })
+        
+        
         return layoutAttributesObjects
     }
 
@@ -32,8 +45,10 @@ class FlowLayout: UICollectionViewFlowLayout {
         }
 
         layoutAttributes.frame.origin.x = sectionInset.left
-        layoutAttributes.frame.size.width = collectionView.safeAreaLayoutGuide.layoutFrame.width - sectionInset.left - sectionInset.right
+        layoutAttributes.frame.size.width = collectionView.safeAreaLayoutGuide.layoutFrame.width / CGFloat(self.gridSize)  - sectionInset.left - sectionInset.right
         return layoutAttributes
     }
+    
+    
 
 }
