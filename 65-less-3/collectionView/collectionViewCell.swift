@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 class CollectionViewCell: UICollectionViewCell{
     var view:UIView!
+
     @IBOutlet weak var topLable: UILabel!
     @IBOutlet weak var bottomLable: UILabel!
     
@@ -33,15 +34,15 @@ class CollectionViewCell: UICollectionViewCell{
     fileprivate func xibSetup()
     {
         view = loadViewFromNib()
-     //   view.frame = self.bound
-        view.autoresizesSubviews = true
+        
+
         addSubview(view)
         NSLayoutConstraint.activate([
             view.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 20),
             view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 20),
             view.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 10),
             view.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: 10)])
-
+        view.frame = self.bounds
 
         
     }
@@ -51,6 +52,13 @@ class CollectionViewCell: UICollectionViewCell{
         let nib = UINib(nibName: "collectionViewCell", bundle: bundle)
         let view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
         return view
+    }
+
+    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+        let layoutAttributes = super.preferredLayoutAttributesFitting(layoutAttributes)
+        layoutIfNeeded()
+        layoutAttributes.frame.size = systemLayoutSizeFitting(UIView.layoutFittingCompressedSize, withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel)
+        return layoutAttributes
     }
 }
 

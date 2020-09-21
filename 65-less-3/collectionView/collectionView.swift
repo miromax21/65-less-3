@@ -29,11 +29,14 @@ class collectionViewController:UIViewController {
         setUpLauout()
         view.backgroundColor = UIColor.white
         view.addSubview(collectionView)
-        self.collectionView.translatesAutoresizingMaskIntoConstraints = false
-        self.collectionView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        self.collectionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        self.collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        self.collectionView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            collectionView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            collectionView.rightAnchor.constraint(equalTo: view.rightAnchor)
+        ])
+       
         
         
         self.collectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.identifier)
@@ -46,12 +49,14 @@ class collectionViewController:UIViewController {
     
     func setUpLauout()   {
         self.collectionView = {
-            let layout = FlowLayout()
-            layout.estimatedItemSize = CGSize(
-                width: view.frame.width,
-                height: 200
-            )
-            let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+            let customFlowLayout = FlowLayout()
+            customFlowLayout.sectionInsetReference = .fromContentInset // .fromContentInset is default
+            customFlowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+            customFlowLayout.minimumInteritemSpacing = 10
+            customFlowLayout.minimumLineSpacing = 10
+            customFlowLayout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+            customFlowLayout.headerReferenceSize = CGSize(width: 0, height: 40)
+            let cv = UICollectionView(frame: .zero, collectionViewLayout: customFlowLayout)
         
             return cv
         }()
@@ -73,10 +78,14 @@ extension collectionViewController: UICollectionViewDataSource, UICollectionView
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.identifier, for: indexPath) as! CollectionViewCell
         cell.setup(title: item.title, text: item.text)
-       // cell.frame.size.width = self.view.frame.width
         return cell
     }
-    
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        collectionView.collectionViewLayout.invalidateLayout()
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        var yOffset: [CGFloat] = .init(repeating: 0, count: 2)
+    }
     
 //    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
 //        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.identifier, for: indexPath) as! CollectionViewCell

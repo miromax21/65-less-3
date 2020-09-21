@@ -10,41 +10,30 @@ import Foundation
 import UIKit
 
 class FlowLayout: UICollectionViewFlowLayout {
-    
-    var gridSize: Int = 1
-    
-    override init() {
-        super.init()
-        self.minimumInteritemSpacing = 1
-        self.minimumLineSpacing = 1
-        self.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 0, right: 10)
-        
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
-    override func prepare() {
-        super.prepare()
-        // Make sure the collection view is valid
-        guard let collectionView = collectionView else { return }
-        let marginsAndInsets = sectionInset.left + sectionInset.right + collectionView.safeAreaInsets.left + collectionView.safeAreaInsets.right + minimumInteritemSpacing * CGFloat(gridSize - 1)
- 
-       
-        collectionView.layoutIfNeeded()
-    
-        let cellSize = ((collectionView.bounds.size.width - marginsAndInsets) / CGFloat(gridSize)).rounded(.down)
-        itemSize = CGSize(width: cellSize, height: cellSize)
-        collectionView.setNeedsLayout()
 
-        
+    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+        let layoutAttributesObjects = super.layoutAttributesForElements(in: rect)?.map{ $0.copy() } as? [UICollectionViewLayoutAttributes]
+        layoutAttributesObjects?.forEach({ layoutAttributes in
+            if layoutAttributes.representedElementCategory == .cell {
+                if let newFrame = layoutAttributesForItem(at: layoutAttributes.indexPath)?.frame {
+                    layoutAttributes.frame = newFrame
+                }
+            }
+        })
+        return layoutAttributesObjects
     }
-    
-    override func invalidationContext(forBoundsChange newBounds: CGRect) -> UICollectionViewLayoutInvalidationContext {
-        let context = super.invalidationContext(forBoundsChange: newBounds) as! UICollectionViewFlowLayoutInvalidationContext
-        context.invalidateFlowLayoutDelegateMetrics = newBounds.size != collectionView?.bounds.size
-        return context
+
+    override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        guard let collectionView = collectionView else {
+            fatalError()
+        }
+        guard let layoutAttributes = super.layoutAttributesForItem(at: indexPath)?.copy() as? UICollectionViewLayoutAttributes else {
+            return nil
+        }
+
+        layoutAttributes.frame.origin.x = sectionInset.left
+        layoutAttributes.frame.size.width = collectionView.safeAreaLayoutGuide.layoutFrame.width - sectionInset.left - sectionInset.right
+        return layoutAttributes
     }
-    
+
 }
